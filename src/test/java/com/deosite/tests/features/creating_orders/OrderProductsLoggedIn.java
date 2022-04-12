@@ -18,6 +18,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.MoveMouse;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -25,8 +26,7 @@ import net.thucydides.core.annotations.Steps;
 
 import static com.deosite.tests.abilities.Load.as;
 import static com.deosite.tests.pages.CheckoutPage.SHIPPING_ADDRESS_IS_THE_SAME_CHECKBOX;
-import static com.deosite.tests.pages.LoginPage.EMAIL_INPUT;
-import static com.deosite.tests.pages.LoginPage.LOGIN_BUTTON;
+import static com.deosite.tests.pages.LoginPage.*;
 import static com.deosite.tests.pages.MainMenu.MINI_CART_BUTTON_AFTER_LOGIN;
 import static com.deosite.tests.pages.MainMenu.SEARCH_BAR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -108,7 +108,9 @@ public class OrderProductsLoggedIn {
     public void actor_changes_shipping_address() throws InterruptedException {
         theActorInTheSpotlight().attemptsTo(
                 ChangeShippingAddress.changeShippingAddress(),
-                WaitUntil.the(CheckoutPage.SUBMIT_BUTTON, isClickable()).forNoMoreThan(50).seconds());
+                WaitUntil.the(CheckoutPage.SUBMIT_BUTTON, isClickable()).forNoMoreThan(50).seconds(),
+                MoveMouse.to(CheckoutPage.SUBMIT_BUTTON)
+        );
         Thread.sleep(4000);
     }
 
