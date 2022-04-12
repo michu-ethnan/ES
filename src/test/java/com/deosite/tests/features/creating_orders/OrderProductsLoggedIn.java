@@ -109,7 +109,7 @@ public class OrderProductsLoggedIn {
         theActorInTheSpotlight().attemptsTo(
                 ChangeShippingAddress.changeShippingAddress(),
                 WaitUntil.the(CheckoutPage.SUBMIT_BUTTON, isClickable()).forNoMoreThan(50).seconds());
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
 

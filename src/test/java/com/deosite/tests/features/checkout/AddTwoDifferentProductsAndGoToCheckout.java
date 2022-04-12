@@ -73,8 +73,9 @@ public class AddTwoDifferentProductsAndGoToCheckout {
                 WaitUntil.the(FIRST_MAIN_CATEGORY, isPresent()),
                 Open.productPageByPosition(9),
                 AddProduct.toCart(),
+                MoveMouseDown.move(),
                 Scroll.to(MINI_CART_BUTTON),
-                Open.miniCart(),
+                Click.on(MINI_CART_BUTTON),
                 Open.checkoutPage()
         );
 
@@ -88,8 +89,9 @@ public class AddTwoDifferentProductsAndGoToCheckout {
                 WaitUntil.the(CATEGORY_HEADER, isPresent()),
                 Open.productPageByPosition(6),
                 AddProduct.toCart(),
+                MoveMouseDown.move(),
                 Scroll.to(MINI_CART_BUTTON),
-                Open.miniCart(),
+                Click.on(MINI_CART_BUTTON),
                 Open.checkoutPage()
         );
     }

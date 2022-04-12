@@ -33,8 +33,8 @@ public class RefreshPaymentPage {
     @Steps
     SetupSteps setupSteps;
 
-    @Given("that {word} selects {word} delivery as {word}")
-    public void that_actor_selects_pickup_point_delivery_type(String actor, String deliveryType, String userType) {
+    @Given("that {word} goes to the payment page as {word}")
+    public void that_rebecca_goes_to_the_payment_page(String actor, String userType) {
         theActorCalled(actor).wasAbleTo(
                 Setup.site(),
                 ClickCategory.byCategoryNumber(2),
@@ -45,7 +45,6 @@ public class RefreshPaymentPage {
                 Open.miniCart(),
                 Open.checkoutPage(),
                 WaitUntil.the(EMAIL_INPUT, isPresent()).forNoMoreThan(50).seconds(),
-                ChooseDelivery.byType(deliveryType),
                 FillInBillingData.type(userType)
         );
     }
@@ -69,7 +68,7 @@ public class RefreshPaymentPage {
     @Then("she should not see the cash on delivery option")
     public void actor_should_not_see_the_cash_on_delivery_option() {
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(PICKUP_PAYMENT_CHECKBOX).isNotDisplayed()
+                Ensure.that(PaymentPage.PLACE_ORDER_BUTTON).isEnabled()
         );
     }
 }

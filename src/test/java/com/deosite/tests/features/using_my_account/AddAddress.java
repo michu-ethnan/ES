@@ -56,22 +56,23 @@ public class AddAddress {
     }
 
     @When("she adds {word} to the address book")
-    public void actor_adds_a_new_address_to_the_address_book(String userType) throws InterruptedException {
+    public void actor_adds_a_new_address_to_the_address_book(String userType)  {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(ADDRESS_BOOK_BUTTON),
                 Click.on(ADD_NEW_ADDRESS_BUTTON),
                 WaitUntil.the(AccountPage.MY_ACCOUNT_SUBHEADER, containsText("Nueva dirección")),
                 FillInAddressForm.type(userType),
                 Click.on(SUBMIT_NEW_ADDRESS_BUTTON),
-                MoveMouse.to(ALERT_BOX)
+                WaitUntil.the(ALERT_BOX, isPresent())
+
         );
-        Thread.sleep(2000);
+
     }
 
     @Then("she should see that it was saved with popup saying address saved")
     public void actor_should_see_that_it_was_saved(){
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(ALERT_BOX).isDisplayed()
+                Ensure.that(SUBMIT_NEW_ADDRESS_BUTTON).isNotDisplayed()
         );
 
 

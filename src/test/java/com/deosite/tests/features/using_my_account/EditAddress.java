@@ -78,18 +78,18 @@ public class EditAddress {
     }
 
     @And("she saves it")
-    public void actor_saves_it() throws InterruptedException {
+    public void actor_saves_it() {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(SUBMIT_NEW_ADDRESS_BUTTON),
-                MoveMouse.to(ALERT_BOX)
+                WaitUntil.the(ALERT_BOX, isPresent())
         );
-        Thread.sleep(2000);
+
     }
 
     @Then("she should see a popup saying address saved")
     public void actor_should_find_this_address_in_the_address_book() {
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(ALERT_BOX).isDisplayed()
+                Ensure.that(SUBMIT_NEW_ADDRESS_BUTTON).isNotDisplayed()
         );
 
 
