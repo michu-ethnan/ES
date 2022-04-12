@@ -4,7 +4,6 @@ import com.deosite.tests.actions.Open;
 import com.deosite.tests.pages.*;
 import com.deosite.tests.steps.SetupSteps;
 import com.deosite.tests.tasks.Setup;
-import com.deosite.tests.tasks.account.FillInAddressForm;
 import com.deosite.tests.tasks.basic.*;
 import com.deosite.tests.tasks.login.FillInLoginForm;
 import com.deosite.tests.tasks.login.SubmitLoginForm;
@@ -19,7 +18,10 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
 
 import static com.deosite.tests.abilities.Load.as;
-import static com.deosite.tests.pages.AccountPage.*;
+import static com.deosite.tests.pages.AccountPage.MY_ACCOUNT_HEADER;
+import static com.deosite.tests.pages.AccountPage.ADDRESS_BOOK_BUTTON;
+import static com.deosite.tests.pages.AccountPage.FIRST_TRASH_ICON;
+import static com.deosite.tests.pages.AccountPage.DIALOG_BOX_YES_BUTTON;
 import static com.deosite.tests.pages.Alert.ALERT_BOX;
 import static com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON;
 import static com.deosite.tests.pages.LoginPage.LOGIN_BUTTON;
@@ -28,6 +30,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -44,6 +47,7 @@ public class DeleteAddress {
                 Open.loginPage(),
                 FillInLoginForm.type("login"),
                 SubmitLoginForm.submitLoginForm(),
+                WaitUntil.the(SUBMIT_BUTTON, isNotPresent()),
                 MoveMouseToTop.move(),
                 Open.accountPage(),
                 WaitUntil.the(MY_ACCOUNT_HEADER, isPresent()).forNoMoreThan(100).seconds(),
@@ -77,5 +81,6 @@ public class DeleteAddress {
                 Ensure.that(ALERT_BOX).isDisplayed(),
                 Click.on(CLOSE_ALERT_BOX_BUTTON)
         );
+
     }
 }

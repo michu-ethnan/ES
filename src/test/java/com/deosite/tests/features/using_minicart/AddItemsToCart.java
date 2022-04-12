@@ -54,7 +54,7 @@ public class AddItemsToCart {
                 WaitUntil.the(SEARCH_BAR, isPresent()).forNoMoreThan(100).seconds(),
                 ClickCategory.byCategoryNumber(4),
                 WaitUntil.the(CATEGORY_HEADER, isPresent()),
-                Open.productPageByPosition(7)
+                Open.productPageByPosition(0)
         );
     }
 

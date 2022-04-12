@@ -31,6 +31,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -47,6 +48,7 @@ public class EditAddress {
                 Open.loginPage(),
                 FillInLoginForm.type("login"),
                 SubmitLoginForm.submitLoginForm(),
+                WaitUntil.the(SUBMIT_BUTTON, isNotPresent()),
                 MoveMouseToTop.move(),
                 Open.accountPage(),
                 WaitUntil.the(MY_ACCOUNT_HEADER, isPresent()).forNoMoreThan(100).seconds(),
@@ -84,11 +86,13 @@ public class EditAddress {
         Thread.sleep(2000);
     }
 
-    @Then("she should see that it was saved with popup saying address saved")
-    public void actor_should_see_that_it_was_saved(){
+    @Then("she should see a popup saying address saved")
+    public void actor_should_find_this_address_in_the_address_book() {
         theActorInTheSpotlight().attemptsTo(
                 Ensure.that(ALERT_BOX).isDisplayed()
         );
+
+
     }
 
 }

@@ -19,6 +19,7 @@ import net.thucydides.core.annotations.Steps;
 import static com.deosite.tests.abilities.Load.as;
 import static com.deosite.tests.pages.Alert.ALERT_BOX;
 import static com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON;
+import static com.deosite.tests.pages.LoginPage.SUBMIT_BUTTON;
 import static com.deosite.tests.pages.MiniCart.MINICART_BUTTON;
 import static com.deosite.tests.pages.MiniCart.DELETE_PRODUCT_BUTTON;
 import static com.deosite.tests.pages.MiniCart.EMPTY_CART_MESSAGE;
@@ -45,14 +46,13 @@ public class DeleteFromCart {
                 Open.productPageByPosition(0),
                 AddProduct.toCart(),
                 Click.on(CLOSE_ALERT_BOX_BUTTON),
-                Open.miniCart()
+                Click.on(MINICART_BUTTON)
         );
     }
 
     @When("she deletes it")
     public void actor_deletes_it() {
         theActorInTheSpotlight().attemptsTo(
-
                 WaitUntil.the(DELETE_PRODUCT_BUTTON, isClickable()),
                 Click.on(DELETE_PRODUCT_BUTTON),
                 Ensure.that(EMPTY_CART_MESSAGE).isDisplayed()
