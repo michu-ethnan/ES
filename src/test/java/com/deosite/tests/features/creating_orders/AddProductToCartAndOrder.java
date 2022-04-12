@@ -36,11 +36,9 @@ public class AddProductToCartAndOrder {
     public void that_actor_adds_product_to_cart(String actor) {
         theActorCalled(actor).wasAbleTo(
                 Setup.site(),
-                ClickCategory.byCategoryNumber(5),
-                Open.productPageByPosition(7),
-                AddProduct.toCart(),
-                MoveMouseDown.move(),
-                Scroll.to(MiniCart.MINICART_BUTTON)
+                ClickCategory.byCategoryNumber(6),
+                Open.productPageByPosition(2),
+                AddProduct.toCart()
 
         );
     }

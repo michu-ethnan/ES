@@ -105,11 +105,13 @@ public class OrderProductsLoggedIn {
     }
 
     @And("he changes shipping address")
-    public void actor_changes_shipping_address() {
+    public void actor_changes_shipping_address() throws InterruptedException {
         theActorInTheSpotlight().attemptsTo(
                 ChangeShippingAddress.changeShippingAddress(),
                 WaitUntil.the(CheckoutPage.SUBMIT_BUTTON, isClickable()).forNoMoreThan(50).seconds());
+        Thread.sleep(2000);
     }
+
 
     @And("he selects {word} payment")
     public void actor_pays_using_selected_payment(String paymentType) {

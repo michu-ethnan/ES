@@ -36,9 +36,9 @@ public class CalculateTotalSumInMinicart {
     public void actor_is_in_minicart(String actor) {
         theActorCalled(actor).wasAbleTo(
                 Setup.site(),
-                ClickCategory.byCategoryNumber(5),
-                Open.productPageByPosition(3)
-                );
+                ClickCategory.byCategoryNumber(0),
+                Open.productPageByPosition(1)
+        );
     }
 
     @And("she sees a product price")

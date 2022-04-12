@@ -13,6 +13,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.MoveMouse;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
@@ -25,11 +26,11 @@ import static com.deosite.tests.pages.Alert.ALERT_BOX;
 import static com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON;
 import static com.deosite.tests.pages.LoginPage.LOGIN_BUTTON;
 import static com.deosite.tests.abilities.Load.as;
+import static com.deosite.tests.pages.LoginPage.SUBMIT_BUTTON;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.containsText;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -53,24 +54,22 @@ public class AddAddress {
     }
 
     @When("she adds {word} to the address book")
-    public void actor_adds_a_new_address_to_the_address_book(String userType) {
+    public void actor_adds_a_new_address_to_the_address_book(String userType) throws InterruptedException {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(ADDRESS_BOOK_BUTTON),
-                WaitUntil.the(ADD_NEW_ADDRESS_BUTTON, isPresent()),
                 Click.on(ADD_NEW_ADDRESS_BUTTON),
                 WaitUntil.the(AccountPage.MY_ACCOUNT_SUBHEADER, containsText("Nueva dirección")),
                 FillInAddressForm.type(userType),
-                WaitUntil.the(SUBMIT_NEW_ADDRESS_BUTTON, isPresent()),
                 Click.on(SUBMIT_NEW_ADDRESS_BUTTON),
-                WaitUntil.the(ALERT_BOX, isPresent()).forNoMoreThan(100).seconds()
+                MoveMouse.to(ALERT_BOX)
         );
+        Thread.sleep(2000);
     }
 
     @Then("she should see a popup saying address saved")
-    public void actor_should_find_this_address_in_the_address_book(){
+    public void actor_should_find_this_address_in_the_address_book() {
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(ALERT_BOX).hasTextContent("Dirección guardada"),
-                Click.on(CLOSE_ALERT_BOX_BUTTON)
+                Ensure.that(ALERT_BOX).isDisplayed()
         );
 
     }

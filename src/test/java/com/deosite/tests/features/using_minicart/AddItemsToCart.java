@@ -65,16 +65,7 @@ public class AddItemsToCart {
         );
     }
 
-    @Then("(s)he should see popup with added to cart message")
-    public void actor_should_see_popup_with_message() {
-        theActorInTheSpotlight().should(seeThat(Alert.value(), containsString("El producto ha sido añadido al carrito")));
-        theActorInTheSpotlight().attemptsTo(
-                Click.on(com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON)
-        );
-
-
-    }
-    @And("ensure that the product is in minicart")
+    @Then("ensure that the product is in minicart")
     public void actor_should_ensure_that_the_product_is_in_minicart(){
         theActorInTheSpotlight().attemptsTo(
                 Open.miniCart()

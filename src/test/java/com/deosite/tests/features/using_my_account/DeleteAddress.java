@@ -4,6 +4,7 @@ import com.deosite.tests.actions.Open;
 import com.deosite.tests.pages.*;
 import com.deosite.tests.steps.SetupSteps;
 import com.deosite.tests.tasks.Setup;
+import com.deosite.tests.tasks.account.FillInAddressForm;
 import com.deosite.tests.tasks.basic.*;
 import com.deosite.tests.tasks.login.FillInLoginForm;
 import com.deosite.tests.tasks.login.SubmitLoginForm;
@@ -12,23 +13,21 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.MoveMouse;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
 
 import static com.deosite.tests.abilities.Load.as;
-import static com.deosite.tests.pages.AccountPage.MY_ACCOUNT_HEADER;
-import static com.deosite.tests.pages.AccountPage.ADDRESS_BOOK_BUTTON;
-import static com.deosite.tests.pages.AccountPage.FIRST_TRASH_ICON;
-import static com.deosite.tests.pages.AccountPage.DIALOG_BOX_YES_BUTTON;
+import static com.deosite.tests.pages.AccountPage.*;
 import static com.deosite.tests.pages.Alert.ALERT_BOX;
 import static com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON;
 import static com.deosite.tests.pages.LoginPage.LOGIN_BUTTON;
+import static com.deosite.tests.pages.LoginPage.SUBMIT_BUTTON;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -62,18 +61,20 @@ public class DeleteAddress {
     }
 
     @And("he confirms that he wants to remove the address")
-    public void actor_confirms_that_he_wants_to_remove_the_address() {
+    public void actor_confirms_that_he_wants_to_remove_the_address() throws InterruptedException {
         theActorInTheSpotlight().attemptsTo(
                 WaitUntil.the(DIALOG_BOX_YES_BUTTON, isClickable()),
                 Click.on(DIALOG_BOX_YES_BUTTON),
-                WaitUntil.the(Alert.ALERT_BOX, isPresent())
+                MoveMouse.to(ALERT_BOX)
+
         );
+        Thread.sleep(2000);
     }
 
     @Then("he should see a popup with address deleted inscription")
     public void actor_should_see_a_popup_with_address_deleted_inscription() {
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(ALERT_BOX).hasTextContent("Address deleted"),
+                Ensure.that(ALERT_BOX).isDisplayed(),
                 Click.on(CLOSE_ALERT_BOX_BUTTON)
         );
     }

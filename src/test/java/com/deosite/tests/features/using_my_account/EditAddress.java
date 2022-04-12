@@ -14,6 +14,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.MoveMouse;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
@@ -25,10 +26,11 @@ import static com.deosite.tests.pages.AccountPage.SUBMIT_NEW_ADDRESS_BUTTON;
 import static com.deosite.tests.pages.Alert.ALERT_BOX;
 import static com.deosite.tests.pages.Alert.CLOSE_ALERT_BOX_BUTTON;
 import static com.deosite.tests.pages.LoginPage.LOGIN_BUTTON;
+import static com.deosite.tests.pages.LoginPage.SUBMIT_BUTTON;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -74,17 +76,18 @@ public class EditAddress {
     }
 
     @And("she saves it")
-    public void actor_saves_it() {
+    public void actor_saves_it() throws InterruptedException {
         theActorInTheSpotlight().attemptsTo(
-                Click.on(SUBMIT_NEW_ADDRESS_BUTTON)
+                Click.on(SUBMIT_NEW_ADDRESS_BUTTON),
+                MoveMouse.to(ALERT_BOX)
         );
+        Thread.sleep(2000);
     }
 
     @Then("she should see that it was saved with popup saying address saved")
     public void actor_should_see_that_it_was_saved(){
         theActorInTheSpotlight().attemptsTo(
-                Ensure.that(ALERT_BOX).hasTextContent("Dirección guardada"),
-                Click.on(CLOSE_ALERT_BOX_BUTTON)
+                Ensure.that(ALERT_BOX).isDisplayed()
         );
     }
 
