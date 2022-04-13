@@ -105,13 +105,12 @@ public class OrderProductsLoggedIn {
     }
 
     @And("he changes shipping address")
-    public void actor_changes_shipping_address() throws InterruptedException {
+    public void actor_changes_shipping_address() {
         theActorInTheSpotlight().attemptsTo(
                 ChangeShippingAddress.changeShippingAddress(),
-                WaitUntil.the(CheckoutPage.SUBMIT_BUTTON, isClickable()).forNoMoreThan(50).seconds(),
                 MoveMouse.to(CheckoutPage.SUBMIT_BUTTON)
         );
-        Thread.sleep(4000);
+
     }
 
 
