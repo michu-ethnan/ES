@@ -23,6 +23,7 @@ import static com.deosite.tests.pages.CheckoutPage.EMAIL_INPUT;
 import static com.deosite.tests.pages.MainMenu.CLOSE_NEWSLETTER_POPUP;
 import static com.deosite.tests.pages.PaymentPage.TRANSFER_PAYMENT_CHECKBOX;
 import static com.deosite.tests.pages.PaymentPage.PICKUP_PAYMENT_CHECKBOX;
+import static com.deosite.tests.pages.ProductPage.OTHER_PRODUCTS_HEADING;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
@@ -40,7 +41,7 @@ public class RefreshPaymentPage {
                 ClickCategory.byCategoryNumber(2),
                 Open.productPageByPosition(5),
                 AddProduct.toCart(),
-                MoveMouseDown.move(),
+                Scroll.to(OTHER_PRODUCTS_HEADING),
                 Scroll.to(MiniCart.MINICART_BUTTON),
                 Open.miniCart(),
                 Open.checkoutPage(),

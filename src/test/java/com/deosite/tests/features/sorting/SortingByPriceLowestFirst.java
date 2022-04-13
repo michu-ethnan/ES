@@ -43,7 +43,7 @@ public class SortingByPriceLowestFirst {
         theActorCalled(actor).wasAbleTo(
                 Setup.site(),
                 WaitUntil.the(FIRST_MAIN_CATEGORY, isPresent()),
-                ClickCategory.byCategoryNumber(1),
+                ClickCategory.byCategoryNumber(6),
                 MoveMouseToTop.move(),
                 WaitUntil.the(CategoryPage.PAGINATION_ARROW, isPresent()).forNoMoreThan(50).seconds()
         );

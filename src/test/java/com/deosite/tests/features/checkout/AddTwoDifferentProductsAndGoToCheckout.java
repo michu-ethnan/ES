@@ -27,12 +27,18 @@ import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
+import org.apache.bcel.generic.MONITORENTER;
 
 import static com.deosite.tests.pages.CategoryPage.CATEGORY_HEADER;
+import static com.deosite.tests.pages.CheckoutPage.EMAIL_INPUT;
 import static com.deosite.tests.pages.MainMenu.*;
+import static com.deosite.tests.pages.MiniCart.GO_TO_CHECKOUT_BUTTON;
+import static com.deosite.tests.pages.ProductPage.ADD_TO_CART_BUTTON;
+import static com.deosite.tests.pages.ProductPage.OTHER_PRODUCTS_HEADING;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
 
 public class AddTwoDifferentProductsAndGoToCheckout {
@@ -47,7 +53,7 @@ public class AddTwoDifferentProductsAndGoToCheckout {
     public void abel_is_on_the_first_category_page(String actor){
         theActorCalled(actor).wasAbleTo(
                 Setup.site(),
-                ClickCategory.byCategoryNumber(0)
+                ClickCategory.byCategoryNumber(4)
         );
 
     }
@@ -56,7 +62,7 @@ public class AddTwoDifferentProductsAndGoToCheckout {
         theActorInTheSpotlight().attemptsTo(
                 Open.productPageByPosition(0),
                 AddProduct.toCart(),
-                MoveMouse.to(ProductPage.OTHER_PRODUCTS_HEADING)
+                Click.on(Alert.CLOSE_ALERT_BOX_BUTTON)
         );
 
     }
@@ -70,13 +76,16 @@ public class AddTwoDifferentProductsAndGoToCheckout {
     @And("he adds another product to the cart and goes to checkout")
     public void actor_adds_another_product_to_cart_and_goes_to_checkout(){
         theActorInTheSpotlight().attemptsTo(
-                WaitUntil.the(FIRST_MAIN_CATEGORY, isPresent()),
-                Open.productPageByPosition(9),
-                AddProduct.toCart(),
-                MoveMouseDown.move(),
+                Open.productPageByPosition(7),
+                Click.on(ADD_TO_CART_BUTTON),
+                WaitUntil.the(Alert.ALERT_BOX, isPresent()),
+                Click.on(Alert.CLOSE_ALERT_BOX_BUTTON),
+                Scroll.to(OTHER_PRODUCTS_HEADING),
                 Scroll.to(MINI_CART_BUTTON),
                 Click.on(MINI_CART_BUTTON),
-                Open.checkoutPage()
+                WaitUntil.the(GO_TO_CHECKOUT_BUTTON, isClickable()),
+                Click.on(GO_TO_CHECKOUT_BUTTON),
+                WaitUntil.the(EMAIL_INPUT, isPresent())
         );
 
     }
@@ -88,11 +97,15 @@ public class AddTwoDifferentProductsAndGoToCheckout {
                 ClickCategory.byCategoryNumber(4),
                 WaitUntil.the(CATEGORY_HEADER, isPresent()),
                 Open.productPageByPosition(6),
-                AddProduct.toCart(),
-                MoveMouseDown.move(),
+                Click.on(ADD_TO_CART_BUTTON),
+                WaitUntil.the(Alert.ALERT_BOX, isPresent()),
+                Click.on(Alert.CLOSE_ALERT_BOX_BUTTON),
+                Scroll.to(OTHER_PRODUCTS_HEADING),
                 Scroll.to(MINI_CART_BUTTON),
                 Click.on(MINI_CART_BUTTON),
-                Open.checkoutPage()
+                WaitUntil.the(GO_TO_CHECKOUT_BUTTON, isClickable()),
+                Click.on(GO_TO_CHECKOUT_BUTTON),
+                WaitUntil.the(EMAIL_INPUT, isPresent())
         );
     }
     @Then("he should see that he is on the payment page as a {word}")

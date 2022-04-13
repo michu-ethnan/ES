@@ -35,6 +35,7 @@ import static com.deosite.tests.pages.CheckoutPage.DELETE_PRODUCT_BUTTON_AT_CHEC
 import static com.deosite.tests.pages.MiniCart.*;
 import static com.deosite.tests.pages.PaymentPage.DELETE_PRODUCT_BUTTON_ON_PAYMENT_PAGE;
 import static com.deosite.tests.pages.PaymentPage.PLACE_ORDER_BUTTON;
+import static com.deosite.tests.pages.ProductPage.OTHER_PRODUCTS_HEADING;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
@@ -66,10 +67,10 @@ public class DeleteFromCartAndCheckTotalSum {
                 Open.productPageByPosition(8),
                 AddProduct.toCart(),
                 WaitUntil.the(CLOSE_ALERT_BOX_BUTTON, isPresent()),
-                Click.on(CLOSE_ALERT_BOX_BUTTON),
+                //Click.on(CLOSE_ALERT_BOX_BUTTON),
                 // WaitUntil.the(SUBMIT_BUTTON, isNotPresent()),
-                MoveMouseDown.move(),
-                Scroll.to(MINICART_BUTTON),
+               // MoveMouse.to(OTHER_PRODUCTS_HEADING),
+               // Scroll.to(MiniCart.MINICART_BUTTON),
                 Click.on(MINICART_BUTTON)
                 //\WaitUntil.the(DELETE_PRODUCT_BUTTON, isPresent())
         );
