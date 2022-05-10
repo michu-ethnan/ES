@@ -1,6 +1,7 @@
 package com.deosite.tests.tasks.mainMenu;
 
 import com.deosite.tests.pages.CategoryPage;
+import com.deosite.tests.tasks.basic.MoveMouseToTop;
 import net.serenitybdd.core.steps.Instrumented;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -31,6 +32,7 @@ public class ClickCategory implements Interaction {
                 WaitUntil.the(CATEGORY_LIST, isEnabled()).forNoMoreThan(100).seconds(),
                 WaitUntil.the(CATEGORY_LIST, isPresent()).forNoMoreThan(100).seconds(),
                 Click.on(CATEGORY_LIST.resolveAllFor(actor).get(number)),
+                MoveMouseToTop.move(),
                 WaitUntil.the(CategoryPage.CATEGORY_HEADER, isPresent()).forNoMoreThan(50).seconds()
                 );
     }
